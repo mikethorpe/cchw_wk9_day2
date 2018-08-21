@@ -49,7 +49,6 @@ public class ManagersController {
 			Department department =  DBHelper.find(departmentId, Department.class);
 			Manager manager = new Manager(firstName,lastName, salary, department, budget);
 			DBHelper.save(manager);
-			Set params = req.queryParams();
 			res.redirect("/managers");
 			return null;
 		}

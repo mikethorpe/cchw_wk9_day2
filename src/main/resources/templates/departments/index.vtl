@@ -10,8 +10,21 @@
     #foreach($department in $departments)
     <tr>
         <td>$department.getTitle()</td>
-
+        <td>
+            <form action="/departments/$department.getId()/edit" method="get">
+                <input type="submit" value="Update" class="button">
+            </form>
+        </td>
+        <td>
+            <form action="/departments/$department.getId()/delete" method="post">
+                <input type="submit" value="Delete" class="button">
+            </form>
+        </td>
     </tr>
     #end
 
 </table>
+
+<form action="/departments/new" method="get">
+    <input type="submit" value="Create department" class="button">
+</form>
