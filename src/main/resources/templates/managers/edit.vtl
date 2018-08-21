@@ -1,5 +1,5 @@
 
-<form action="/managers/$manager.getId()/edit" method="post">
+<form action="/managers/$manager.getId()" method="post">
 
     <label for="firstName">First Name: </label>
     <input type="text" name="firstName" id="firstName" required="true" value="$manager.getFirstName()">
@@ -8,10 +8,10 @@
     <input type="text" name="lastName" id="lastName" required="true" value="$manager.getLastName()">
 
     <label for="salary">Salary: </label>
-    <input type="number" name="salary" id="salary" required="true" value="$manager.getSalary()">
+    <input type="number" name="salary" id="salary" required="true" value="$manager.getSalary().intValue()" min="0" step="1">
 
     <label for="budget">Budget (£): </label>
-    <input type="number" name="budget" id="budget" required="true" value="$manager.getBudget()">
+    <input type="number" name="budget" id="budget" required="true" value="$manager.getBudget().intValue()" min="0" step="1">
 
     <label for="departmentId">Department: </label>
     <select name="departmentId" id="departmentId" required="true">

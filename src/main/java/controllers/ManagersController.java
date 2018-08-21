@@ -34,10 +34,10 @@ public class ManagersController {
 		get("/managers/new", (req, res) ->{
 			List<Department> departments = DBHelper.getAll(Department.class);
 			Map<String, Object> model = new HashMap<>();
-					model.put("template", "templates/managers/new.vtl");
-					model.put("departments", departments);
-					return new ModelAndView(model, "templates/layout.vtl");
-				}, new VelocityTemplateEngine()
+			model.put("template", "templates/managers/new.vtl");
+			model.put("departments", departments);
+			return new ModelAndView(model, "templates/layout.vtl");
+		}, new VelocityTemplateEngine()
 		);
 
 		post("/managers/new", (req, res) -> {
@@ -78,7 +78,7 @@ public class ManagersController {
 		);
 
 
-		post("/managers/:id/edit", (req, res) -> {
+		post("/managers/:id", (req, res) -> {
 
 			//get the manager to update from the db
 			int managerId = Integer.parseInt(req.params(":id"));
@@ -106,7 +106,7 @@ public class ManagersController {
 			}
 		);
 
-		post("/managers/:id/destroy", (req, res) ->{
+		post("/managers/:id/delete", (req, res) ->{
 			int managerId = Integer.parseInt(req.params(":id"));
 			Manager manager = DBHelper.find(managerId, Manager.class);
 			DBHelper.delete(manager);
