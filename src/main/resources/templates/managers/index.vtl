@@ -16,8 +16,22 @@
         <td>$manager.getLastName()</td>
         <td>$manager.getDepartment().getTitle()</td>
         <td>$manager.getBudget()</td>
+        <td>
+            <form action="/managers/$manager.getId()/edit" method="get">
+                <input type="submit" value="Update" class="button">
+            </form>
+        </td>
+        <td>
+            <form action="/managers/$manager.getId()/destroy" method="post">
+                <input type="submit" value="Delete" class="button">
+            </form>
+        </td>
 
     </tr>
     #end
 
 </table>
+
+<form action="/managers/new" method="get">
+    <input type="submit" value="Create manager" class="button">
+</form>
