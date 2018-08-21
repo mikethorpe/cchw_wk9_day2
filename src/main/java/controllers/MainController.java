@@ -15,16 +15,16 @@ public class MainController {
 		setupEndPoints();
 		ManagersController managersController = new ManagersController();
 		EmployeesController employeesController = new EmployeesController();
-
+		DepartmentsController departmentsController = new DepartmentsController();
 
 	}
 
 	public static void setupEndPoints(){
 		get("/", (req, res) ->{
-					Map<String, Object> model = new HashMap<>();
-					model.put("template", "templates/index.vtl");
-					return new ModelAndView(model, "templates/layout.vtl");
-				}, new VelocityTemplateEngine()
+			Map<String, Object> model = new HashMap<>();
+			model.put("template", "templates/index.vtl");
+			return new ModelAndView(model, "templates/layout.vtl");
+		}, new VelocityTemplateEngine()
 		);
 	}
 }

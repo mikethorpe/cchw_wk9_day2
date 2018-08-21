@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBHelper;
+import models.Department;
 import models.Manager;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class ManagersController {
 
@@ -28,7 +30,31 @@ public class ManagersController {
 		}, new VelocityTemplateEngine()
 		);
 
+		get("/managers/new", (req, res) ->{
+			List<Department> departments = DBHelper.getAll(Department.class);
+			Map<String, Object> model = new HashMap<>();
+					model.put("template", "templates/managers/new.vtl");
+					model.put("departments", departments);
+					return new ModelAndView(model, "templates/layout.vtl");
+				}, new VelocityTemplateEngine()
+		);
+
+		post("/managers", (req, res) -> {
+			String firstName = req.queryParams("firstName");
+			String lastName = req.queryParams("lastName");
+			int salary = Integer.parseInt(req.queryParams("salary"));
+			int budget = Integer.parseInt(req.queryParams("budget"));
+			int departmentId = Integer.parseInt(req.queryParams("departmentId"));
+			Department department =  DBHelper.find(departmentId, Department.class);
+			Manager manager = new Manager(firstName,lastName, salary, department, budget);
+			DBHelper.save(manager);
+			res.redirect("/managers");
+			return null;
+		}
+		);
 	}
+
+
 
 
 
